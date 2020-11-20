@@ -1,0 +1,76 @@
+<layout-header></layout-header>
+
+<main>
+  <layout-menu></layout-menu>
+  <div class="container">
+    <h2>Basic</h2>
+    <hr />
+    <button [poppyPopover]="pop">Show basic</button>
+    <ng-template #pop>Popover..</ng-template>
+
+    <h2>Hover</h2>
+    <hr />
+    <div style="background-color: red; width: 200px; height: 40px" [poppyPopover]="hoverPop" trigger="hover">
+      Hover to show popup
+    </div>
+    <ng-template #hoverPop>Hover popover..</ng-template>
+
+    <h2>Menu</h2>
+    <hr />
+    <button [poppyMenu]="menu">Show menu</button>
+    <poppy-menu #menu>
+      <li poppy-menu-item>Test 1</li>
+      <li poppy-menu-item>Test 2</li>
+    </poppy-menu>
+
+    <h2>Tooltip</h2>
+    <hr />
+    <h4>Tooltip with text</h4>
+    <button [poppyTooltip]="'Tooltip with text'">Hover to show tooltip with text</button>
+    <h4>Tooltip with template</h4>
+    <button [poppyTooltip]="tooltipTmp">Hover to show tooltip with template</button>
+    <ng-template #tooltipTmp><strong>Tooltip with template</strong> </ng-template>
+
+    <h2>Nested menu</h2>
+    <hr />
+
+    <button [poppyMenu]="extendedMenu">Show menu with submenus</button>
+
+    <h2>Context menu</h2>
+    <hr />
+
+    <div
+      style="background-color: red; width: 200px; height: 40px"
+      [poppyMenu]="extendedMenu"
+      type="context"
+      trigger="hover"
+    >
+      Contetx menu
+    </div>
+
+    <poppy-menu #extendedMenu="poppyMenu">
+      <li poppy-menu-item [submenu]="submenu">
+        Test
+        <poppy-menu #submenu="poppyMenu">
+      <li poppy-menu-item [submenu]="submenu2">
+        Submenu item 1 deep 1
+        <poppy-menu #submenu2="poppyMenu">
+      <li poppy-menu-item>Submenu item 1 deep 2</li>
+      <li poppy-menu-item>Submenu item 2 deep 2</li>
+    </poppy-menu>
+    </li>
+    <li poppy-menu-item [submenu]="submenu3">
+      Submenu item 2 deep 1
+      <poppy-menu #submenu3="poppyMenu">
+    <li poppy-menu-item>Submenu item 2 deep 2</li>
+    </poppy-menu>
+    </li>
+    </poppy-menu>
+    </li>
+    <li poppy-menu-item>Test 2</li>
+    </poppy-menu>
+
+    <code-snippet fromFile="shared/code-snippet/code-snippet.component.ts"></code-snippet>
+    <code-snippet fromFile="shared/code-snippet/code-snippet.component.spec.ts"></code-snippet>
+  </div>
+</main>
